@@ -79,7 +79,11 @@
        referenced assemblies (e.g. YoutubeExplode). Build covers the dev/run output;
        Publish must be patched separately because the publish pipeline copies the
        assembly straight from the NuGet cache, not from the build output. -->
-  <Target Name="DeorcifyBuild" AfterTargets="Build" Condition="Exists('$(TargetDir)YoutubeExplode.dll')">
+  <Target
+    Name="DeorcifyBuild"
+    AfterTargets="Build"
+    Condition="Exists('$(TargetDir)YoutubeExplode.dll')"
+  >
     <Exec Command="dotnet run --project &quot;$(ProjectDir)../tools/Deorcifier/Deorcifier.csproj&quot; --configuration Release --verbosity quiet -- &quot;$(TargetDir)YoutubeExplode.dll&quot;" />
   </Target>
 
@@ -89,6 +93,7 @@
     </PropertyGroup>
     <Exec
       Condition="Exists('$(_PublishedYoutubeExplode)')"
-      Command="dotnet run --project &quot;$(ProjectDir)../tools/Deorcifier/Deorcifier.csproj&quot; --configuration Release --verbosity quiet -- &quot;$(_PublishedYoutubeExplode)&quot;" />
+      Command="dotnet run --project &quot;$(ProjectDir)../tools/Deorcifier/Deorcifier.csproj&quot; --configuration Release --verbosity quiet -- &quot;$(_PublishedYoutubeExplode)&quot;"
+    />
   </Target>
 </Project>
