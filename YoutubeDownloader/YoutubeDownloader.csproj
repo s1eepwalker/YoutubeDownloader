@@ -35,7 +35,6 @@
     <PackageReference Include="Cogwheel" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="CSharpier.MsBuild" PrivateAssets="all" />
-    <PackageReference Include="Deorcify" />
     <PackageReference Include="DialogHost.Avalonia" />
     <PackageReference Include="Gress" />
     <PackageReference Include="Markdig" />
@@ -74,5 +73,12 @@
       Command="dotnet run --file &quot;$(ProjectDir)PublishMacOSBundle.csx&quot; -- --publish-dir &quot;$(PublishDir)&quot; --icons-file &quot;$(ProjectDir)../favicon.icns&quot; --full-version $(Version) --short-version $(AssemblyVersion)"
       LogStandardErrorAsError="true"
     />
+  </Target>
+
+  <!-- Strip the Deorcify region-restriction check that the Deorcify package bakes into
+       referenced assemblies (e.g. YoutubeExplode). Runs after Build, so the publish
+       pipeline copies the already-neutralized assembly into the published output. -->
+  <Target Name="Deorcify" AfterTargets="Build" Condition="Exists('$(TargetDir)YoutubeExplode.dll')">
+    <Exec Command="dotnet run --project &quot;$(ProjectDir)../tools/Deorcifier/Deorcifier.csproj&quot; --configuration Release --verbosity quiet -- &quot;$(TargetDir)YoutubeExplode.dll&quot;" />
   </Target>
 </Project>
