@@ -76,9 +76,19 @@
   </Target>
 
   <!-- Strip the Deorcify region-restriction check that the Deorcify package bakes into
-       referenced assemblies (e.g. YoutubeExplode). Runs after Build, so the publish
-       pipeline copies the already-neutralized assembly into the published output. -->
-  <Target Name="Deorcify" AfterTargets="Build" Condition="Exists('$(TargetDir)YoutubeExplode.dll')">
+       referenced assemblies (e.g. YoutubeExplode). Build covers the dev/run output;
+       Publish must be patched separately because the publish pipeline copies the
+       assembly straight from the NuGet cache, not from the build output. -->
+  <Target Name="DeorcifyBuild" AfterTargets="Build" Condition="Exists('$(TargetDir)YoutubeExplode.dll')">
     <Exec Command="dotnet run --project &quot;$(ProjectDir)../tools/Deorcifier/Deorcifier.csproj&quot; --configuration Release --verbosity quiet -- &quot;$(TargetDir)YoutubeExplode.dll&quot;" />
+  </Target>
+
+  <Target Name="DeorcifyPublish" AfterTargets="Publish">
+    <PropertyGroup>
+      <_PublishedYoutubeExplode>$([System.IO.Path]::GetFullPath('$(PublishDir)'))YoutubeExplode.dll</_PublishedYoutubeExplode>
+    </PropertyGroup>
+    <Exec
+      Condition="Exists('$(_PublishedYoutubeExplode)')"
+      Command="dotnet run --project &quot;$(ProjectDir)../tools/Deorcifier/Deorcifier.csproj&quot; --configuration Release --verbosity quiet -- &quot;$(_PublishedYoutubeExplode)&quot;" />
   </Target>
 </Project>
