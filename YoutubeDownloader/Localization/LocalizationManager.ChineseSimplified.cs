@@ -39,11 +39,6 @@ public partial class LocalizationManager
             [nameof(ThemeTooltip)] = "首选的用户界面主题",
             [nameof(LanguageLabel)] = "语言",
             [nameof(LanguageTooltip)] = "首选的用户界面显示语言",
-            [nameof(AutoUpdateLabel)] = "自动更新",
-            [nameof(AutoUpdateTooltip)] = """
-                每次启动时执行自动更新。
-                **警告：** 建议保持此选项启用，以确保应用程序与最新版本的 YouTube 兼容。
-                """,
             [nameof(PersistAuthLabel)] = "持久化身份验证",
             [nameof(PersistAuthTooltip)] = """
                 将身份验证 Cookie 保存到文件中，以便在不同会话之间持久化。
@@ -115,9 +110,5 @@ public partial class LocalizationManager
             [nameof(NothingFoundTitle)] = "未找到内容",
             [nameof(NothingFoundMessage)] = "无法根据你提供的查询或 URL 找到任何视频",
             [nameof(ErrorTitle)] = "错误",
-            [nameof(UpdateDownloadingMessage)] = "正在下载更新至 {0} v{1}...",
-            [nameof(UpdateReadyMessage)] = "更新已下载，将在你退出时安装",
-            [nameof(UpdateInstallNowButton)] = "立即安装",
-            [nameof(UpdateFailedMessage)] = "应用程序更新失败",
         };
 }

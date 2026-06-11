@@ -41,11 +41,6 @@ public partial class LocalizationManager
         [nameof(ThemeTooltip)] = "Bevorzugtes Oberflächendesign",
         [nameof(LanguageLabel)] = "Sprache",
         [nameof(LanguageTooltip)] = "Bevorzugte Anzeigesprache für die Benutzeroberfläche",
-        [nameof(AutoUpdateLabel)] = "Automatische Updates",
-        [nameof(AutoUpdateTooltip)] = """
-            Automatische Updates bei jedem Start durchführen.
-            **Hinweis:** Es wird empfohlen, diese Option aktiviert zu lassen, um die Kompatibilität mit der neuesten YouTube-Version zu gewährleisten.
-            """,
         [nameof(PersistAuthLabel)] = "Authentifizierung speichern",
         [nameof(PersistAuthTooltip)] = """
             Authentifizierungs-Cookies in einer Datei speichern für sitzungsübergreifende Persistenz.
@@ -121,10 +116,5 @@ public partial class LocalizationManager
         [nameof(NothingFoundMessage)] =
             "Es konnten keine Videos basierend auf der angegebenen Anfrage oder URL gefunden werden",
         [nameof(ErrorTitle)] = "Fehler",
-        [nameof(UpdateDownloadingMessage)] = "Update für {0} v{1} wird heruntergeladen...",
-        [nameof(UpdateReadyMessage)] =
-            "Update wurde heruntergeladen und wird beim Beenden installiert",
-        [nameof(UpdateInstallNowButton)] = "JETZT INSTALLIEREN",
-        [nameof(UpdateFailedMessage)] = "Anwendungsupdate konnte nicht durchgeführt werden",
     };
 }

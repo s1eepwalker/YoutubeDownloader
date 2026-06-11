@@ -20,7 +20,6 @@
     <PackageVersion Include="Material.Avalonia.DataGrid" Version="3.16.1" />
     <PackageVersion Include="Material.Icons.Avalonia" Version="3.0.2" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
-    <PackageVersion Include="Onova" Version="2.6.13" />
     <PackageVersion Include="PowerKit" Version="2.0.2" />
     <PackageVersion Include="TagLibSharp" Version="2.3.0" />
     <PackageVersion Include="ThisAssembly.Project" Version="2.1.2" />

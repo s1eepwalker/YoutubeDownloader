@@ -6,8 +6,6 @@ namespace YoutubeDownloader;
 public partial class StartOptions
 {
     public required string SettingsPath { get; init; }
-
-    public required bool IsAutoUpdateAllowed { get; init; }
 }
 
 public partial class StartOptions
@@ -22,9 +20,5 @@ public partial class StartOptions
                         ? Path.Combine(path, "Settings.dat")
                         : path
                     : Path.Combine(AppContext.BaseDirectory, "Settings.dat"),
-            IsAutoUpdateAllowed = !(
-                Environment.GetEnvironmentVariable("YOUTUBEDOWNLOADER_ALLOW_AUTO_UPDATE") is { } env
-                && env.Equals("false", StringComparison.OrdinalIgnoreCase)
-            ),
         };
 }

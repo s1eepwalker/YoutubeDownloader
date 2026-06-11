@@ -39,11 +39,6 @@ public partial class LocalizationManager
             [nameof(ThemeTooltip)] = "Бажана тема інтерфейсу",
             [nameof(LanguageLabel)] = "Мова",
             [nameof(LanguageTooltip)] = "Бажана мова відображення інтерфейсу користувача",
-            [nameof(AutoUpdateLabel)] = "Авто-оновлення",
-            [nameof(AutoUpdateTooltip)] = """
-                Виконувати автоматичні оновлення при кожному запуску.
-                **Увага:** рекомендується залишити цю опцію увімкненою для сумісності з останньою версією YouTube.
-                """,
             [nameof(PersistAuthLabel)] = "Зберігати автентифікацію",
             [nameof(PersistAuthTooltip)] = """
                 Зберігати файли cookie у файлі для збереження між сеансами.
@@ -117,9 +112,5 @@ public partial class LocalizationManager
             [nameof(NothingFoundTitle)] = "Нічого не знайдено",
             [nameof(NothingFoundMessage)] = "Не вдалося знайти відео за вказаним запитом або URL",
             [nameof(ErrorTitle)] = "Помилка",
-            [nameof(UpdateDownloadingMessage)] = "Завантаження оновлення {0} v{1}...",
-            [nameof(UpdateReadyMessage)] = "Оновлення завантажено та буде встановлено після виходу",
-            [nameof(UpdateInstallNowButton)] = "ВСТАНОВИТИ ЗАРАЗ",
-            [nameof(UpdateFailedMessage)] = "Не вдалося виконати оновлення програми",
         };
 }

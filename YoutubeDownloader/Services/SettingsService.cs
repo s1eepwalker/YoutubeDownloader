@@ -23,9 +23,6 @@ public partial class SettingsService()
     public partial Language Language { get; set; }
 
     [ObservableProperty]
-    public partial bool IsAutoUpdateEnabled { get; set; } = true;
-
-    [ObservableProperty]
     public partial bool IsAuthPersisted { get; set; } = true;
 
     [ObservableProperty]

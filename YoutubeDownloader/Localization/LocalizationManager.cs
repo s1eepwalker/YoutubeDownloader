@@ -109,8 +109,6 @@ public partial class LocalizationManager
     public string ThemeTooltip => Get();
     public string LanguageLabel => Get();
     public string LanguageTooltip => Get();
-    public string AutoUpdateLabel => Get();
-    public string AutoUpdateTooltip => Get();
     public string PersistAuthLabel => Get();
     public string PersistAuthTooltip => Get();
     public string InjectAltLanguagesLabel => Get();
@@ -169,8 +167,4 @@ public partial class LocalizationManager
     public string NothingFoundTitle => Get();
     public string NothingFoundMessage => Get();
     public string ErrorTitle => Get();
-    public string UpdateDownloadingMessage => Get();
-    public string UpdateReadyMessage => Get();
-    public string UpdateInstallNowButton => Get();
-    public string UpdateFailedMessage => Get();
 }
