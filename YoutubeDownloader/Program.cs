@@ -16,7 +16,9 @@ public static class Program
 
     public static string VersionString { get; } = Version.ToString(3);
 
-    public static bool IsDevelopmentBuild { get; } = Version.Major is <= 0 or >= 999;
+    // 999 is the in-repo/CI placeholder major (999.9.9-dev); real releases use a
+    // calendar major (e.g. 2026.x) and must not be treated as development builds.
+    public static bool IsDevelopmentBuild { get; } = Version.Major is <= 0 or 999;
 
     public static string ProjectUrl { get; } = "https://github.com/Tyrrrz/YoutubeDownloader";
 
