@@ -19,6 +19,7 @@ public class LanguageToStringConverter : IValueConverter
             ? language switch
             {
                 Language.ChineseSimplified => "Simplified Chinese",
+                Language.Russian => "Русский",
                 _ => language.ToString(),
             }
             : default;

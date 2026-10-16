@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
+using System.Net;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.WebView.Windows.Core;
-using Microsoft.Web.WebView2.Core;
-using WebViewCore.Events;
+using Avalonia.Platform;
 using YoutubeDownloader.Framework;
 using YoutubeDownloader.ViewModels.Dialogs;
 
@@ -16,70 +16,85 @@ public partial class AuthSetupView : UserControl<AuthSetupViewModel>
         $"https://accounts.google.com/ServiceLogin?continue={Uri.EscapeDataString(HomePageUri.AbsoluteUri)}"
     );
 
-    private CoreWebView2? _coreWebView2;
+    public AuthSetupView()
+    {
+        InitializeComponent();
 
-    public AuthSetupView() => InitializeComponent();
+        // GTK supports an ephemeral cookie store; WPE remains a fallback when GTK is unavailable.
+        if (OperatingSystem.IsLinux())
+            WebBrowser.AdapterPreference =
+            [
+                WebViewAdapterType.WebKitGtk,
+                WebViewAdapterType.WpeWebKit,
+            ];
+    }
 
-    private void NavigateToLoginPage() => WebBrowser.Url = LoginPageUri;
+    private void NavigateToLoginPage() => WebBrowser.Source = LoginPageUri;
 
-    private void LogOutButton_OnClick(object sender, RoutedEventArgs args)
+    private async void LogOutButton_OnClick(object sender, RoutedEventArgs args)
     {
         DataContext.Cookies = null;
+
+        if (WebBrowser.TryGetCookieManager() is { } cookieManager)
+        {
+            foreach (var cookie in await cookieManager.GetCookiesAsync())
+                cookieManager.DeleteCookie(cookie);
+        }
+
         NavigateToLoginPage();
     }
 
     private void WebBrowser_OnLoaded(object sender, RoutedEventArgs args) => NavigateToLoginPage();
 
-    private void WebBrowser_OnWebViewCreated(object sender, WebViewCreatedEventArgs args)
-    {
-        if (!args.IsSucceed)
-            return;
-
-        var platformWebView = WebBrowser.PlatformWebView as WebView2Core;
-        var coreWebView2 = platformWebView?.CoreWebView2;
-
-        if (coreWebView2 is null)
-            return;
-
-        coreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-        coreWebView2.Settings.AreDevToolsEnabled = false;
-        coreWebView2.Settings.IsGeneralAutofillEnabled = false;
-        coreWebView2.Settings.IsPasswordAutosaveEnabled = false;
-        coreWebView2.Settings.IsStatusBarEnabled = false;
-        coreWebView2.Settings.IsSwipeNavigationEnabled = false;
-
-        _coreWebView2 = coreWebView2;
-    }
-
-    private async void WebBrowser_OnNavigationStarting(
+    private void WebBrowser_OnEnvironmentRequested(
         object? sender,
-        WebViewUrlLoadingEventArg args
+        WebViewEnvironmentRequestedEventArgs args
     )
     {
-        if (_coreWebView2 is null)
+        args.EnableDevTools = false;
+
+        switch (args)
+        {
+            case WindowsWebView2EnvironmentRequestedEventArgs windows:
+                windows.IsInPrivateModeEnabled = true;
+                break;
+            case AppleWKWebViewEnvironmentRequestedEventArgs apple:
+                apple.NonPersistentDataStore = true;
+                break;
+            case GtkWebViewEnvironmentRequestedEventArgs gtk:
+                gtk.EphemeralDataManager = true;
+                break;
+        }
+    }
+
+    private static bool IsYoutubeCookie(Cookie cookie)
+    {
+        var domain = cookie.Domain.TrimStart('.');
+
+        return !string.IsNullOrEmpty(domain)
+            && (
+                string.Equals(HomePageUri.Host, domain, StringComparison.OrdinalIgnoreCase)
+                || HomePageUri.Host.EndsWith($".{domain}", StringComparison.OrdinalIgnoreCase)
+            );
+    }
+
+    private async void WebBrowser_OnNavigationCompleted(
+        object? sender,
+        WebViewNavigationCompletedEventArgs args
+    )
+    {
+        if (!args.IsSuccess || WebBrowser.TryGetCookieManager() is not { } cookieManager)
             return;
 
-        // Reset existing browser cookies if the user is attempting to log in (again)
+        // Extract YouTube cookies after the login redirects to the home page.
         if (
-            string.Equals(
-                args.Url?.AbsoluteUri,
-                LoginPageUri.AbsoluteUri,
-                StringComparison.OrdinalIgnoreCase
-            )
-        )
-        {
-            _coreWebView2.CookieManager.DeleteAllCookies();
-        }
-
-        // Extract the cookies after being redirected to the home page (i.e. after logging in)
-        if (
-            args.Url is { } url
+            args.Request is { } url
             && string.Equals(url.Scheme, HomePageUri.Scheme, StringComparison.OrdinalIgnoreCase)
             && string.Equals(url.Host, HomePageUri.Host, StringComparison.OrdinalIgnoreCase)
         )
         {
-            var cookies = await _coreWebView2!.CookieManager.GetCookiesAsync(url.AbsoluteUri);
-            DataContext.Cookies = cookies.Select(c => c.ToSystemNetCookie()).ToArray();
+            var cookies = await cookieManager.GetCookiesAsync();
+            DataContext.Cookies = cookies.Where(IsYoutubeCookie).ToArray();
         }
     }
 }

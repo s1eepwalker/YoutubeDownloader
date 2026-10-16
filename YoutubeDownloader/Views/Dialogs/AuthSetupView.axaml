@@ -66,12 +66,12 @@
                     Text="{Binding LocalizationManager.LoadingText}" />
 
                 <!--  Browser  -->
-                <WebView
+                <NativeWebView
                     x:Name="WebBrowser"
+                    EnvironmentRequested="WebBrowser_OnEnvironmentRequested"
                     IsVisible="{Binding !IsAuthenticated}"
                     Loaded="WebBrowser_OnLoaded"
-                    NavigationStarting="WebBrowser_OnNavigationStarting"
-                    WebViewCreated="WebBrowser_OnWebViewCreated" />
+                    NavigationCompleted="WebBrowser_OnNavigationCompleted" />
             </Panel>
         </Border>
 

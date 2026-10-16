@@ -45,6 +45,7 @@ public partial class LocalizationManager : ObservableObject, IDisposable
                     "deu" => GermanLocalization,
                     "fra" => FrenchLocalization,
                     "spa" => SpanishLocalization,
+                    "rus" => RussianLocalization,
                     "zho"
                         when CultureInfo
                             .CurrentUICulture.GetSelfAndParents()
@@ -58,6 +59,7 @@ public partial class LocalizationManager : ObservableObject, IDisposable
             Language.French => FrenchLocalization,
             Language.Spanish => SpanishLocalization,
             Language.ChineseSimplified => ChineseSimplifiedLocalization,
+            Language.Russian => RussianLocalization,
             _ => EnglishLocalization,
         };
 
