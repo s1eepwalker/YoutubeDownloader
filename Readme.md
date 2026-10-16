@@ -1,9 +1,8 @@
 # YoutubeDownloader
 
-[![Status](https://img.shields.io/badge/status-maintenance-ffd700.svg)](https://github.com/Tyrrrz/.github/blob/prime/docs/project-status.md)
-[![Build](https://img.shields.io/github/actions/workflow/status/Tyrrrz/YoutubeDownloader/main.yml?branch=prime)](https://github.com/Tyrrrz/YoutubeDownloader/actions)
-[![Release](https://img.shields.io/github/release/Tyrrrz/YoutubeDownloader.svg)](https://github.com/Tyrrrz/YoutubeDownloader/releases)
-[![Downloads](https://img.shields.io/github/downloads/Tyrrrz/YoutubeDownloader/total.svg)](https://github.com/Tyrrrz/YoutubeDownloader/releases)
+[![Build](https://img.shields.io/github/actions/workflow/status/s1eepwalker/YoutubeDownloader/main.yml?branch=prime)](https://github.com/s1eepwalker/YoutubeDownloader/actions)
+[![Release](https://img.shields.io/github/release/s1eepwalker/YoutubeDownloader.svg)](https://github.com/s1eepwalker/YoutubeDownloader/releases)
+[![Downloads](https://img.shields.io/github/downloads/s1eepwalker/YoutubeDownloader/total.svg)](https://github.com/s1eepwalker/YoutubeDownloader/releases)
 [![Discord](https://img.shields.io/discord/869237470565392384?label=discord)](https://discord.gg/2SUWKFnHSm)
 
 <table>
@@ -26,8 +25,8 @@ It also supports searching by keywords, which is helpful if you want to quickly 
 
 ## Download
 
-- 🟢 **[Stable release](https://github.com/Tyrrrz/YoutubeDownloader/releases/latest)**
-- 🟠 [CI build](https://github.com/Tyrrrz/YoutubeDownloader/actions/workflows/main.yml)
+- 🟢 **[Stable release](https://github.com/s1eepwalker/YoutubeDownloader/releases/latest)**
+- 🟠 [CI build](https://github.com/s1eepwalker/YoutubeDownloader/actions/workflows/main.yml)
 - 📦 [Scoop](https://scoop.sh/#/apps?q=YoutubeDownloader&p=1&id=2c0182d9ff5edefc525a57d50ead470d8f02184f): `scoop install extras/youtubedownloader` (community-maintained)
 - 📦 [AUR](https://aur.archlinux.org/packages/youtubedownloader): `yay -S youtubedownloader` (community-maintained)
 
