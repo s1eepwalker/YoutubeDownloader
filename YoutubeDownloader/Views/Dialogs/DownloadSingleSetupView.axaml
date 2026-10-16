@@ -107,8 +107,11 @@
                             </Border>
                         </StackPanel>
 
-                        <!--  Container  -->
-                        <TextBlock FontWeight="Light" Text="{Binding Container, Mode=OneWay}" />
+                        <!--  Container and estimated download size  -->
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock FontWeight="Light" Text="{Binding Container, Mode=OneWay}" />
+                            <TextBlock FontWeight="Light" Text="{Binding EstimatedSizeText, Mode=OneWay}" />
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

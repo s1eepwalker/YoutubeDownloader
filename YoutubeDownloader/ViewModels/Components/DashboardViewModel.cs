@@ -174,6 +174,8 @@ public partial class DashboardViewModel : ViewModelBase
                     download.CancellationToken
                 );
 
+            download.DownloadOption = downloadOption;
+
             await downloader.DownloadVideoAsync(
                 download.FilePath!,
                 download.Video!,
@@ -198,6 +200,16 @@ public partial class DashboardViewModel : ViewModelBase
                 {
                     // Media tagging is not critical
                 }
+            }
+
+            try
+            {
+                if (File.Exists(download.FilePath))
+                    download.ActualSizeBytes = new FileInfo(download.FilePath).Length;
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                // File size is informational; a successful download should remain successful.
             }
 
             download.Status = DownloadStatus.Completed;

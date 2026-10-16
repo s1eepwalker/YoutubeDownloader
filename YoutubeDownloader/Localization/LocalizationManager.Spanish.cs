@@ -19,6 +19,7 @@ public partial class LocalizationManager
                 Presiona **Shift+Enter** para agregar múltiples elementos
                 """,
             [nameof(DownloadsFileColumnHeader)] = "Archivo",
+            [nameof(DownloadsSizeColumnHeader)] = "Tamaño",
             [nameof(DownloadsStatusColumnHeader)] = "Estado",
             [nameof(ContextMenuRemoveSuccessful)] = "Eliminar descargas exitosas",
             [nameof(ContextMenuRemoveInactive)] = "Eliminar descargas inactivas",

@@ -17,6 +17,10 @@ public partial record VideoDownloadOption(
 
     public bool IsVideoUpscaled { get; } =
         StreamInfos.OfType<IVideoStreamInfo>().Any(s => s.IsVideoUpscaled);
+
+    public long EstimatedSizeBytes { get; } = StreamInfos.Sum(s => s.Size.Bytes);
+
+    public string EstimatedSizeText => $"≈ {new FileSize(EstimatedSizeBytes)}";
 }
 
 public partial record VideoDownloadOption

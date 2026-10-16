@@ -19,6 +19,7 @@ public partial class LocalizationManager
                 使用 **Shift+Enter** 可添加多个项目
                 """,
             [nameof(DownloadsFileColumnHeader)] = "文件",
+            [nameof(DownloadsSizeColumnHeader)] = "大小",
             [nameof(DownloadsStatusColumnHeader)] = "状态",
             [nameof(ContextMenuRemoveSuccessful)] = "移除已完成的下载",
             [nameof(ContextMenuRemoveInactive)] = "移除未激活的下载",

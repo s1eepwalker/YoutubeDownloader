@@ -19,6 +19,7 @@ public partial class LocalizationManager
                 Нажмите **Shift+Enter**, чтобы добавить несколько элементов
                 """,
             [nameof(DownloadsFileColumnHeader)] = "Файл",
+            [nameof(DownloadsSizeColumnHeader)] = "Размер",
             [nameof(DownloadsStatusColumnHeader)] = "Состояние",
             [nameof(ContextMenuRemoveSuccessful)] = "Убрать завершённые загрузки",
             [nameof(ContextMenuRemoveInactive)] = "Убрать неактивные загрузки",

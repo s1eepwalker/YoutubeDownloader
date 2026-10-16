@@ -19,6 +19,7 @@ public partial class LocalizationManager
                 Press **Shift+Enter** to add multiple items
                 """,
             [nameof(DownloadsFileColumnHeader)] = "File",
+            [nameof(DownloadsSizeColumnHeader)] = "Size",
             [nameof(DownloadsStatusColumnHeader)] = "Status",
             [nameof(ContextMenuRemoveSuccessful)] = "Remove successful downloads",
             [nameof(ContextMenuRemoveInactive)] = "Remove inactive downloads",

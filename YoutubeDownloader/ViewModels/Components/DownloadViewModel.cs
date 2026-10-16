@@ -14,6 +14,7 @@ using YoutubeDownloader.Framework;
 using YoutubeDownloader.Localization;
 using YoutubeDownloader.Utils.Extensions;
 using YoutubeExplode.Videos;
+using YoutubeExplode.Videos.Streams;
 
 namespace YoutubeDownloader.ViewModels.Components;
 
@@ -49,6 +50,8 @@ public partial class DownloadViewModel : ViewModelBase
     public partial IVideo? Video { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SizeBytes))]
+    [NotifyPropertyChangedFor(nameof(SizeText))]
     public partial VideoDownloadOption? DownloadOption { get; set; }
 
     [ObservableProperty]
@@ -69,9 +72,21 @@ public partial class DownloadViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(CopyErrorMessageCommand))]
     public partial string? ErrorMessage { get; set; }
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SizeBytes))]
+    [NotifyPropertyChangedFor(nameof(SizeText))]
+    public partial long? ActualSizeBytes { get; set; }
+
     public CancellationToken CancellationToken => _cancellationTokenSource.Token;
 
     public string? FileName => Path.GetFileName(FilePath);
+
+    public long? SizeBytes => ActualSizeBytes ?? DownloadOption?.EstimatedSizeBytes;
+
+    public string SizeText =>
+        ActualSizeBytes is { } actualSize
+            ? new FileSize(actualSize).ToString()
+            : DownloadOption?.EstimatedSizeText ?? "—";
 
     public ProgressContainer<Percentage> Progress { get; } = new();
 

@@ -170,6 +170,20 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
+                    <!--  Download size  -->
+                    <DataGridTemplateColumn
+                        MinWidth="90"
+                        Header="{Binding #UserControl.DataContext.LocalizationManager.DownloadsSizeColumnHeader}"
+                        SortMemberPath="SizeBytes">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="{Binding SizeText}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <!--  Status  -->
                     <DataGridTemplateColumn
                         MinWidth="100"

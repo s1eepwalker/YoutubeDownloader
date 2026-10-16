@@ -5,9 +5,9 @@
     xmlns:converters="clr-namespace:YoutubeDownloader.Converters"
     xmlns:dialogs="clr-namespace:YoutubeDownloader.ViewModels.Dialogs"
     xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-    Width="380"
+    Width="600"
     x:DataType="dialogs:SettingsViewModel">
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto">
         <TextBlock
             Grid.Row="0"
             Margin="16"
@@ -17,19 +17,19 @@
 
         <Border
             Grid.Row="1"
-            Padding="0,8"
+            Padding="0,4"
             BorderBrush="{DynamicResource MaterialDividerBrush}"
             BorderThickness="0,1">
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical">
+            <Grid ColumnDefinitions="*,*">
+                <StackPanel Grid.Column="0" Orientation="Vertical">
                     <!--  Theme  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.ThemeTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ThemeLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.ThemeLabel}" />
                         <ComboBox
-                            Width="160"
+                            Width="120"
                             DockPanel.Dock="Right"
                             ItemsSource="{Binding AvailableThemes}"
                             SelectedItem="{Binding Theme}" />
@@ -37,12 +37,12 @@
 
                     <!--  Language  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.LanguageTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.LanguageLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.LanguageLabel}" />
                         <ComboBox
-                            Width="160"
+                            Width="120"
                             DockPanel.Dock="Right"
                             ItemsSource="{Binding AvailableLanguages}"
                             SelectedItem="{Binding Language}">
@@ -56,20 +56,20 @@
 
                     <!--  SOCKS5 proxy  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.ProxyEnabledTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ProxyEnabledLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.ProxyEnabledLabel}" />
                         <ToggleSwitch DockPanel.Dock="Right" IsChecked="{Binding IsProxyEnabled}" />
                     </DockPanel>
 
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.ProxyIpAddressTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ProxyIpAddressLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.ProxyIpAddressLabel}" />
                         <TextBox
-                            Width="150"
+                            Width="120"
                             Height="20"
                             DockPanel.Dock="Right"
                             FontSize="13"
@@ -78,12 +78,12 @@
                     </DockPanel>
 
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.ProxyPortTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ProxyPortLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.ProxyPortLabel}" />
                         <NumericUpDown
-                            Width="150"
+                            Width="120"
                             DockPanel.Dock="Right"
                             FormatString="0"
                             Maximum="65535"
@@ -97,23 +97,26 @@
                             <TextBlock Inlines="{Binding LocalizationManager.PersistAuthTooltip, Converter={x:Static converters:MarkdownToInlinesConverter.Instance}}" />
                         </ToolTip.Tip>
                         <TextBlock
-                            Margin="16,8"
+                            Margin="12,5"
                             DockPanel.Dock="Left"
+                            MaxWidth="145"
+                            TextWrapping="Wrap"
                             Text="{Binding LocalizationManager.PersistAuthLabel}" />
                         <ToggleSwitch
-                            Margin="16,8"
+                            Margin="12,5"
                             DockPanel.Dock="Right"
                             IsChecked="{Binding IsAuthPersisted}" />
                     </DockPanel>
-
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
                     <!--  FFmpeg path  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.FFmpegPathTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.FFmpegPathLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.FFmpegPathLabel}" />
                         <TextBox
-                            Width="150"
+                            Width="120"
                             Height="20"
                             DockPanel.Dock="Right"
                             FontSize="13"
@@ -150,48 +153,48 @@
 
                     <!--  Inject language-specific audio streams  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.InjectAltLanguagesTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.InjectAltLanguagesLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.InjectAltLanguagesLabel}" />
                         <ToggleSwitch DockPanel.Dock="Right" IsChecked="{Binding ShouldInjectLanguageSpecificAudioStreams}" />
                     </DockPanel>
 
                     <!--  Inject subtitles  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.InjectSubtitlesTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.InjectSubtitlesLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.InjectSubtitlesLabel}" />
                         <ToggleSwitch DockPanel.Dock="Right" IsChecked="{Binding ShouldInjectSubtitles}" />
                     </DockPanel>
 
                     <!--  Inject tags  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.InjectTagsTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.InjectTagsLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.InjectTagsLabel}" />
                         <ToggleSwitch DockPanel.Dock="Right" IsChecked="{Binding ShouldInjectTags}" />
                     </DockPanel>
 
                     <!--  Skip existing files  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.SkipExistingFilesTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.SkipExistingFilesLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.SkipExistingFilesLabel}" />
                         <ToggleSwitch DockPanel.Dock="Right" IsChecked="{Binding ShouldSkipExistingFiles}" />
                     </DockPanel>
 
                     <!--  File name template  -->
-                    <DockPanel Margin="16,8" LastChildFill="False">
+                    <DockPanel Margin="12,5" LastChildFill="False">
                         <ToolTip.Tip>
                             <TextBlock Inlines="{Binding LocalizationManager.FileNameTemplateTooltip, Converter={x:Static converters:MarkdownToInlinesConverter.Instance}}" />
                         </ToolTip.Tip>
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.FileNameTemplateLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.FileNameTemplateLabel}" />
                         <TextBox
-                            Width="150"
+                            Width="120"
                             Height="20"
                             DockPanel.Dock="Right"
                             FontSize="13"
@@ -201,17 +204,17 @@
 
                     <!--  Parallel limit  -->
                     <DockPanel
-                        Margin="16,8"
+                        Margin="12,5"
                         LastChildFill="False"
                         ToolTip.Tip="{Binding LocalizationManager.ParallelLimitTooltip}">
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ParallelLimitLabel}" />
+                        <TextBlock DockPanel.Dock="Left" MaxWidth="145" TextWrapping="Wrap" Text="{Binding LocalizationManager.ParallelLimitLabel}" />
                         <StackPanel
                             DockPanel.Dock="Right"
                             Orientation="Horizontal"
                             Spacing="10">
                             <TextBlock Text="{Binding ParallelLimit}" />
                             <Slider
-                                Width="150"
+                                Width="90"
                                 IsSnapToTickEnabled="True"
                                 Maximum="10"
                                 Minimum="1"
@@ -220,7 +223,7 @@
                         </StackPanel>
                     </DockPanel>
                 </StackPanel>
-            </ScrollViewer>
+            </Grid>
         </Border>
 
         <!--  Close button  -->

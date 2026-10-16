@@ -89,6 +89,7 @@ public partial class LocalizationManager
     public string SettingsTooltip => Get();
     public string DashboardPlaceholder => Get();
     public string DownloadsFileColumnHeader => Get();
+    public string DownloadsSizeColumnHeader => Get();
     public string DownloadsStatusColumnHeader => Get();
     public string ContextMenuRemoveSuccessful => Get();
     public string ContextMenuRemoveInactive => Get();
