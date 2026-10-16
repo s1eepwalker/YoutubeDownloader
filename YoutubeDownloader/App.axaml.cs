@@ -1,4 +1,6 @@
 using System;
+using AsyncImageLoader;
+using AsyncImageLoader.Loaders;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -6,7 +8,9 @@ using Avalonia.Media;
 using Avalonia.Platform;
 using Material.Styles.Themes;
 using Microsoft.Extensions.DependencyInjection;
+using PowerKit;
 using PowerKit.Extensions;
+using YoutubeDownloader.Core.Utils;
 using YoutubeDownloader.Framework;
 using YoutubeDownloader.Localization;
 using YoutubeDownloader.Services;
@@ -23,6 +27,8 @@ public partial class App : Application, IDisposable
     private readonly SettingsService _settingsService;
 
     private readonly IDisposable _eventSubscription;
+    private IDisposable? _proxySubscription;
+    private RamCachedWebImageLoader? _imageLoader;
 
     private bool _isDisposed;
 
@@ -99,6 +105,18 @@ public partial class App : Application, IDisposable
         // Load settings
         _settingsService.Load();
 
+        _proxySubscription = Disposable.Merge(
+            _settingsService.WatchProperty(o => o.IsProxyEnabled, _ => ConfigureProxy()),
+            _settingsService.WatchProperty(o => o.ProxyIpAddress, _ => ConfigureProxy()),
+            _settingsService.WatchProperty(o => o.ProxyPort, _ => ConfigureProxy())
+        );
+        ConfigureProxy();
+
+        var previousImageLoader = ImageLoader.AsyncImageLoader;
+        _imageLoader = new RamCachedWebImageLoader(Http.Client, false);
+        ImageLoader.AsyncImageLoader = _imageLoader;
+        previousImageLoader.Dispose();
+
         // Initialize and configure the main window
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -124,6 +142,13 @@ public partial class App : Application, IDisposable
         // Re-initialize the theme when the system theme changes
         InitializeTheme();
 
+    private void ConfigureProxy() =>
+        Http.ConfigureProxy(
+            _settingsService.IsProxyEnabled,
+            _settingsService.ProxyIpAddress,
+            _settingsService.ProxyPort
+        );
+
     public void Dispose()
     {
         if (_isDisposed)
@@ -132,6 +157,8 @@ public partial class App : Application, IDisposable
         _isDisposed = true;
 
         _eventSubscription.Dispose();
+        _proxySubscription?.Dispose();
+        _imageLoader?.Dispose();
         _services.Dispose();
     }
 }

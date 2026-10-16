@@ -23,6 +23,15 @@ public partial class SettingsService()
     public partial Language Language { get; set; }
 
     [ObservableProperty]
+    public partial bool IsProxyEnabled { get; set; }
+
+    [ObservableProperty]
+    public partial string ProxyIpAddress { get; set; } = "127.0.0.1";
+
+    [ObservableProperty]
+    public partial int ProxyPort { get; set; } = 5555;
+
+    [ObservableProperty]
     public partial bool IsAuthPersisted { get; set; } = true;
 
     [ObservableProperty]
@@ -57,6 +66,19 @@ public partial class SettingsService()
     [ObservableProperty]
     public partial VideoQualityPreference LastVideoQualityPreference { get; set; } =
         VideoQualityPreference.Highest;
+
+    public override bool Load()
+    {
+        var result = base.Load();
+
+        if (!IPAddress.TryParse(ProxyIpAddress, out _))
+            ProxyIpAddress = "127.0.0.1";
+
+        if (ProxyPort is < 1 or > 65535)
+            ProxyPort = 5555;
+
+        return result;
+    }
 
     public override void Save()
     {

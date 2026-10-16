@@ -4,6 +4,7 @@ using System.Net;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform;
+using YoutubeDownloader.Core.Utils;
 using YoutubeDownloader.Framework;
 using YoutubeDownloader.ViewModels.Dialogs;
 
@@ -57,6 +58,9 @@ public partial class AuthSetupView : UserControl<AuthSetupViewModel>
         {
             case WindowsWebView2EnvironmentRequestedEventArgs windows:
                 windows.IsInPrivateModeEnabled = true;
+                if (Http.ProxyUri is { } proxyUri)
+                    windows.AdditionalBrowserArguments =
+                        $"{windows.AdditionalBrowserArguments} --proxy-server={proxyUri.GetLeftPart(UriPartial.Authority)}";
                 break;
             case AppleWKWebViewEnvironmentRequestedEventArgs apple:
                 apple.NonPersistentDataStore = true;

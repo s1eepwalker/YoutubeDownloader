@@ -111,6 +111,13 @@ public partial class LocalizationManager
     public string ThemeTooltip => Get();
     public string LanguageLabel => Get();
     public string LanguageTooltip => Get();
+    public string ProxyEnabledLabel => Get();
+    public string ProxyEnabledTooltip => Get();
+    public string ProxyIpAddressLabel => Get();
+    public string ProxyIpAddressTooltip => Get();
+    public string ProxyInvalidIpMessage => Get();
+    public string ProxyPortLabel => Get();
+    public string ProxyPortTooltip => Get();
     public string PersistAuthLabel => Get();
     public string PersistAuthTooltip => Get();
     public string InjectAltLanguagesLabel => Get();

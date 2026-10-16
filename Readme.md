@@ -51,6 +51,13 @@ It also supports searching by keywords, which is helpful if you want to quickly 
 - Automatically embed subtitles
 - Automatically inject media tags
 - Log in with a YouTube account to access private content
+- Route network requests through a SOCKS5 proxy
+
+## SOCKS5 proxy
+
+Enable **Use SOCKS5 proxy** in Settings and enter the proxy IP address and port. The defaults are `127.0.0.1` and `5555`; the proxy is off until you enable it. For an SSH tunnel, run `ssh -D 5555 your-host` and keep that session open while using the app.
+
+The proxy applies to downloads, search, thumbnails, metadata, and the FFmpeg download. On Windows, it also applies to the built-in sign-in browser. Reopen the sign-in window after changing the proxy settings.
 
 ## Screenshots
 

@@ -54,6 +54,43 @@
                         </ComboBox>
                     </DockPanel>
 
+                    <!--  SOCKS5 proxy  -->
+                    <DockPanel
+                        Margin="16,8"
+                        LastChildFill="False"
+                        ToolTip.Tip="{Binding LocalizationManager.ProxyEnabledTooltip}">
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ProxyEnabledLabel}" />
+                        <ToggleSwitch DockPanel.Dock="Right" IsChecked="{Binding IsProxyEnabled}" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Margin="16,8"
+                        LastChildFill="False"
+                        ToolTip.Tip="{Binding LocalizationManager.ProxyIpAddressTooltip}">
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ProxyIpAddressLabel}" />
+                        <TextBox
+                            Width="150"
+                            Height="20"
+                            DockPanel.Dock="Right"
+                            FontSize="13"
+                            Text="{Binding ProxyIpAddress, UpdateSourceTrigger=LostFocus}"
+                            Theme="{DynamicResource CompactTextBox}" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Margin="16,8"
+                        LastChildFill="False"
+                        ToolTip.Tip="{Binding LocalizationManager.ProxyPortTooltip}">
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding LocalizationManager.ProxyPortLabel}" />
+                        <NumericUpDown
+                            Width="150"
+                            DockPanel.Dock="Right"
+                            FormatString="0"
+                            Maximum="65535"
+                            Minimum="1"
+                            Value="{Binding ProxyPort}" />
+                    </DockPanel>
+
                     <!--  Persist authentication  -->
                     <DockPanel IsVisible="{OnPlatform False, Windows=True}" LastChildFill="False">
                         <ToolTip.Tip>

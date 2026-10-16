@@ -39,6 +39,14 @@ public partial class LocalizationManager
             [nameof(ThemeTooltip)] = "Оформление интерфейса",
             [nameof(LanguageLabel)] = "Язык",
             [nameof(LanguageTooltip)] = "Язык интерфейса",
+            [nameof(ProxyEnabledLabel)] = "Использовать SOCKS5-прокси",
+            [nameof(ProxyEnabledTooltip)] =
+                "Направлять загрузки, поиск, изображения и другие запросы приложения через SOCKS5. В Windows прокси действует и для окна входа.",
+            [nameof(ProxyIpAddressLabel)] = "IP-адрес прокси",
+            [nameof(ProxyIpAddressTooltip)] = "IP-адрес сервера SOCKS5-прокси",
+            [nameof(ProxyInvalidIpMessage)] = "Введите корректный IP-адрес",
+            [nameof(ProxyPortLabel)] = "Порт прокси",
+            [nameof(ProxyPortTooltip)] = "Порт сервера SOCKS5-прокси",
             [nameof(PersistAuthLabel)] = "Сохранять авторизацию",
             [nameof(PersistAuthTooltip)] = """
                 Сохранять файлы cookie для авторизации между запусками приложения.

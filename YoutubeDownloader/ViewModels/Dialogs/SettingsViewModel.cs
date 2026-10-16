@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.Input;
@@ -40,12 +41,49 @@ public partial class SettingsViewModel : DialogViewModelBase
         set => _settingsService.Theme = value;
     }
 
-    public IReadOnlyList<Language> AvailableLanguages { get; } = Enum.GetValues<Language>();
+    public IReadOnlyList<Language> AvailableLanguages { get; } =
+    [
+        Language.System,
+        Language.English,
+        Language.Russian,
+        Language.Ukrainian,
+        Language.German,
+        Language.French,
+        Language.Spanish,
+        Language.ChineseSimplified,
+    ];
 
     public Language Language
     {
         get => _settingsService.Language;
         set => _settingsService.Language = value;
+    }
+
+    public bool IsProxyEnabled
+    {
+        get => _settingsService.IsProxyEnabled;
+        set => _settingsService.IsProxyEnabled = value;
+    }
+
+    public string ProxyIpAddress
+    {
+        get => _settingsService.ProxyIpAddress;
+        set
+        {
+            if (!IPAddress.TryParse(value, out var address))
+                throw new ArgumentException(
+                    LocalizationManager.ProxyInvalidIpMessage,
+                    nameof(value)
+                );
+
+            _settingsService.ProxyIpAddress = address.ToString();
+        }
+    }
+
+    public int ProxyPort
+    {
+        get => _settingsService.ProxyPort;
+        set => _settingsService.ProxyPort = Math.Clamp(value, 1, 65535);
     }
 
     public bool IsAuthPersisted

@@ -39,6 +39,14 @@ public partial class LocalizationManager
             [nameof(ThemeTooltip)] = "Preferred user interface theme",
             [nameof(LanguageLabel)] = "Language",
             [nameof(LanguageTooltip)] = "Preferred display language for the user interface",
+            [nameof(ProxyEnabledLabel)] = "Use SOCKS5 proxy",
+            [nameof(ProxyEnabledTooltip)] =
+                "Route downloads, search, images, and other app requests through SOCKS5. On Windows, this also covers the sign-in browser.",
+            [nameof(ProxyIpAddressLabel)] = "Proxy IP address",
+            [nameof(ProxyIpAddressTooltip)] = "IP address of the SOCKS5 proxy server",
+            [nameof(ProxyInvalidIpMessage)] = "Enter a valid IP address",
+            [nameof(ProxyPortLabel)] = "Proxy port",
+            [nameof(ProxyPortTooltip)] = "Port of the SOCKS5 proxy server",
             [nameof(PersistAuthLabel)] = "Persist authentication",
             [nameof(PersistAuthTooltip)] = """
                 Save authentication cookies to a file so that they can be persisted between sessions.
